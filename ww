@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WhatsApp Redirect</title>
+    <script>
+        const managers = [
+            '87758368335',
+            '87777071994',
+            '87081006606'
+        ];
+
+        function getManagerForClient() {
+            let assignedManager = localStorage.getItem('assignedManager');
+
+            if (!assignedManager) {
+                const managerIndex = Math.floor(Math.random() * managers.length);
+                assignedManager = managers[managerIndex];
+                localStorage.setItem('assignedManager', assignedManager);
+            }
+
+            return assignedManager;
+        }
+
+        function redirectToWhatsApp() {
+            const manager = getManagerForClient();
+            const message = encodeURIComponent('Саламатсызба?');
+            const link = `https://wa.me/${manager}?text=${message}`;
+            window.location.href = link;
+        }
+
+        window.onload = redirectToWhatsApp;
+    </script>
+</head>
+<body>
+</body>
+</html>
